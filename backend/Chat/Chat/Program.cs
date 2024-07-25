@@ -12,7 +12,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("https://localhost:3000")
+        policy.WithOrigins("http://localhost:3000")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
@@ -21,13 +21,10 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddSignalR();
 
-
-
 var app = builder.Build();
-
-app.UseCors();
 
 app.MapHub<ChatHub>("/chat");
 
-app.Run();
+app.UseCors();
 
+app.Run();
