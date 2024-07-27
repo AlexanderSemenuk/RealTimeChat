@@ -38,6 +38,7 @@ This project is a full-stack real-time chat application with integrated sentimen
 2. Backend setup:
 - Navigate to the server directory
 - Update the `appsettings.json` file with your Azure SQL Database and Cognitive Services credentials
+- Update Redis and Azure SignalR connection strings with your credentials
 - Run `dotnet restore` to install dependencies
 - Run `dotnet ef database update` to apply migrations to your database
 
@@ -56,28 +57,9 @@ This project is a full-stack real-time chat application with integrated sentimen
 For local testing, a `docker-compose.yml` file is needed. Here's a basic example:
 
 ```yaml
-version: '3'
 services:
-backend:
- build:
-   context: ./server
-   dockerfile: Dockerfile
- ports:
-   - "5000:80"
- environment:
-   - ASPNETCORE_ENVIRONMENT=Development
-   - ConnectionStrings__DefaultConnection=your_connection_string_here
-   - AzureCognitiveServices__Endpoint=your_endpoint_here
-   - AzureCognitiveServices__ApiKey=your_api_key_here
-
-frontend:
- build:
-   context: ./client
-   dockerfile: Dockerfile
- ports:
-   - "3000:3000"
- depends_on:
-   - backend
-
-
-Make sure to replace the placeholder values with your actual configuration.
+  chat.redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
