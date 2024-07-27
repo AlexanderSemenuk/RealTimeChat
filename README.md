@@ -33,7 +33,7 @@ This project is a full-stack real-time chat application with integrated sentimen
 
 ## Setup
 
-1. Clone the repository: git clone https://github.com/your-username/your-repo-name.git
+1. Clone the repository: git clone https://github.com/AlexanderSemenuk/RealTimeChat.git
 
 2. Backend setup:
 - Navigate to the server directory
