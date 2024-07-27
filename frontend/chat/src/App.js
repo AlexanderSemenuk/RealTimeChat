@@ -10,13 +10,17 @@ const App = () => {
 
 	const joinChat = async (userName, chatRoom) => {
 		var connection = new HubConnectionBuilder()
-			.withUrl("http://localhost:5022/chat")
+			.withUrl("https://onlinechatserver.azurewebsites.net/chat")
 			.withAutomaticReconnect()
 			.build();
 
 		connection.on("ReceiveMessage", (userName, message) => {
-			setMessages((messages) => [...messages, { userName, message }]);
+			setMessages((messages) => [...messages, { userName, message, sentiment: 'Neutral' }]);
 		});
+
+		connection.on("ReceiveMessageWithSentiment", (userName, message, sentiment) => {
+            setMessages((messages) => [...messages, { userName, message, sentiment }]);
+        });
 
 		try {
 			await connection.start();
